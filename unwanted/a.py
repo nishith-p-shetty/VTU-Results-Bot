@@ -3,10 +3,10 @@ ip = "b'VTU Result 2022\n\t\t\t\t\t\t\t\t\t\t\t\xe0\xb2\xb5\xe0\xb2\xbf.\xe0\xb2
 #txt = ip.replace('\t',"")
 #txt = ip.split("\n")
 #print(txt.encode("utf-8"))
-soup = BeautifulSoup(ip, 'html.parser')
+soup = BeautifulSoup(ip, 'html.parser').text
 #print(soup.prettify())
-a = soup.prettify()
-a = a.replace("\t", "")
+#a = soup.prettify()
+a = soup.replace("\t", "")
 a = a.split("\n")
 i = 0
 for l in a:
