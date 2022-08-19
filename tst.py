@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 from time import sleep
 from collections import Counter
@@ -32,7 +31,6 @@ def sgpa(marks):
 
 
 exam = str(1)+ " Semester"
-path = os.getcwd()
 cs = ['A', 'B', 'C', 'D', 'E']
 with pd.ExcelWriter(exam+".xlsx") as writer:
     for crs in cs:
@@ -62,7 +60,6 @@ with pd.ExcelWriter(exam+".xlsx") as writer:
             for i in range(9):
                 total = total + int(response[pos])
                 marks.append(int(response[pos]))
-                print(int(response[pos]))
                 pos = pos+7
             total_percentage_array.append(total)
             percentage_percentage_array.append(total/9)
