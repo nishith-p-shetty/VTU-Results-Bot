@@ -1,5 +1,8 @@
 unwanted/
-1 Semester.xlsx
+*.xlsx
 response.txt
+t.txt
+tst.txt
+tst.py
 .DS_Store
 .gitignore
