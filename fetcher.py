@@ -1,11 +1,13 @@
-from bs4 import BeautifulSoup
-import requests
 import os
+from time import sleep
+import requests
 import html
-college = {"CS": 1}
-CAPCHA = 'Xpaecu'
-COOKIE = 'skbmpilpjum62jfs34k2obdn080amqk7f6fecfackul9e9udkn5dkpuf1qf0jlo0e5dlt73revv9lqedas0mj1mb7g23t5672o32cd1'
-TOKEN = '99a7221e9b64fbaa389f976c45444c6881adee24'
+from collections import Counter
+from bs4 import BeautifulSoup
+college = {"CI": 110}
+CAPCHA = 'bVXXud'
+COOKIE = 'v0541a7t43h7o4ifst2hgp79e3f577hf5n8q2p8iu1esihkh1o9hk1opspvn0ak7va4nk45rfe3ni4bfn9qgu8k63agtjuk0n4h1k31'
+TOKEN = '90db35af85ef1a49409eb551347be8acf335cd97'
 URL = "https://results.vtu.ac.in/FMEcbcs22/resultpage.php"
 HEADERS = {
     'Host': 'results.vtu.ac.in',
@@ -32,25 +34,46 @@ HEADERS = {
 exam = str(1)+ " Semester"
 path = os.getcwd()
 for course, nos in college.items():
-    for n in range(0,nos):
-        usn = '1DB21' + course + str(n+1).zfill(3)
-        PAYLOAD = 'Token='+TOKEN+'&lns='+usn+'&captchacode='+CAPCHA
-        response = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
-        response = html.unescape(response.text)
-        response = BeautifulSoup(response, 'html.parser').text
-        response = response.replace("\t", "")
-        response = response.strip()
-        response = response.replace("\n\n\n", "\n")
-        response = response.replace("\n\n", "\n")
-        response = response.replace("\n\n\n", "\n")
-        response = response.replace("\n\n", "\n")
-        response = response.replace(" : ", "")
-        response = response.replace(": ", "")
-        response = response.split("\n")
-        del response[78:]
-        del response[:3]
-        #print(response)
-        i = 0
-        for l in response:
-            print(i, l)
-            i=i+1
+    for err in range(19):
+        for n in range(0,nos):
+            if(err == 18):
+                sleep(5)
+            usn = '1DB21' + course + str(n+1).zfill(3)
+            PAYLOAD = 'Token='+TOKEN+'&lns='+usn+'&captchacode='+CAPCHA
+            response = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
+            response = html.unescape(response.text)
+            #print(response)
+            response = BeautifulSoup(response, 'html.parser').text
+            response = response.replace("\t", "")
+            response = response.strip()
+            response = response.replace("\n\n\n", "\n")
+            response = response.replace("\n\n", "\n")
+            response = response.replace("\n\n\n", "\n")
+            response = response.replace("\n\n", "\n")
+            response = response.replace(" : ", "")
+            response = response.replace(": ", "")
+            response = response.split("\n")
+            del response[78:]
+            del response[:3]
+            frequency = Counter(response)
+            frequency = dict(frequency)
+            result = ("PASS" if frequency['P'] == 9  else "FAIL")
+            name = response[3]
+            total = 0
+            c = 16
+            for i in range(9):
+                total = total + int(response[c])
+                c = c+7
+
+
+
+            print(usn)
+            print(response[3])
+            print(result)
+            print(total)
+            print()
+
+            #i = 0
+            #for l in response:
+            #    print(i, l)
+            #    i=i+1
