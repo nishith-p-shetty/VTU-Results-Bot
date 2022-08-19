@@ -1,0 +1,91 @@
+0 b'VTU Result 2022
+1 à²µà²¿.à²¤à²¾.à²µà²¿ à²¸à²¾à²®à²¯à²¿à² à²«à²²à²¿à²¤à²¾à²à²¶.  VTU PROVISIONAL RESULT.
+2   à²µà²¿.à²¤à²¾.à²µà²¿ à²ªà²¦à²µà²¿ / à²¸à³à²¨à²¾à²¤à²à³à²¤à³à²¤à²° à²ªà²¦à²µà²¿ à²ªà²°à³à²à³à²·à³à²¯ à²¸à²¾à²®à²¯à²¿à² à²«à²²à²¿à²¤à²¾à²à²¶ à²«à³à²¬à³à²°à²µà²°à²¿ / à²®à²¾à²°à³à²à³ - à³¨à³¦à³¨à³¨.   VTU PROVISIONAL RESULTS OF UG / PG FEBRUARY / MARCH - 2022 EXAMINATION.
+3 University Seat Number
+4  : 1DB21CS001
+5 Student Name
+6 : AAYUSH P NAIR
+7 Semester : 1
+8 Subject Code
+9 Subject Name
+10 Internal Marks
+11 External Marks
+12 Total
+13 Result
+14 Announced / Updated on
+15 21MAT11
+16 CALCULUS AND DIFFERENTIAL EQUATIONS
+17 48
+18 34
+19 82
+20 P
+21 2022-07-15
+22 21PHY12
+23 ENGINEERING PHYSICS
+24 43
+25 29
+26 72
+27 P
+28 2022-07-15
+29 21ELE13
+30 BASIC ELECTRICAL ENGINEERING
+31 47
+32 20
+33 67
+34 P
+35 2022-07-15
+36 21CIV14
+37 ELEMENTS OF CIVIL ENGINEERING AND MECHANICS
+38 44
+39 41
+40 85
+41 P
+42 2022-07-15
+43 21EVN15
+44 ENGINEERING VISUALIZATION
+45 37
+46 48
+47 85
+48 P
+49 2022-07-15
+50 21PHYL16
+51 ENGINEERING PHYSICS LABORATORY
+52 48
+53 46
+54 94
+55 P
+56 2022-07-15
+57 21ELEL17
+58 BASIC ELECTRICAL ENGINEERING LABORATORY
+59 44
+60 47
+61 91
+62 P
+63 2022-07-15
+64 21EGH18
+65 COMMUNICATIVE ENGLISH
+66 45
+67 42
+68 87
+69 P
+70 2022-07-15
+71 21IDT19
+72 INNOVATION AND DESIGN THINKING
+73 48
+74 27
+75 75
+76 P
+77 2022-07-15
+78  à²¨à²¾à²®à²à²°à²£ / à²¸à²à²à³à²·à³à²ªà²£à²à²³à³   Nomenclature / Abbreviations
+79 P -&gt; PASS
+80 F -&gt; FAIL
+81 A -&gt; ABSENT
+82 W -&gt; WITHHELD
+83 X, NE -&gt; NOT ELIGIBLE
+84 Note :  1) Results of some subjects of some students are not appearing due to reasons such as,
+85 a) CIE not Availableb) SEE not available because of technical reasons etc, however they will be updated shortly.
+86 2) Withheld results to be announced later
+87 à²¸à²¹à²¿/-Sd/-
+88 à²à³à²²à²¸à²à²¿à²µà²°à³ (à²®à³à²²à³à²¯à²®à²¾à²ªà²¨) REGISTRAR (EVALUATION)
+89  Â© à³¨à³¦à³¨à³¨ à²µà²¿à²¨à³à²¯à²¾à²¸ à²®à²¤à³à²¤à³ à²à²­à²¿à²µà³à²¦à³à²§à²¿à²ªà²¡à²¿à²¸à²¿à²¦à²µà²°à³ à²¯à³à²à²¨à²¾ à²¨à²¿à²°à³à²µà²¹à²£à³ à²µà²¿à²­à²¾à² (à²ªà²¿. à²à²®à³. à²¸à²¿), à²µà²¿.à²¤à²¾.à²µà²¿, à²¬à³à²³à²à²¾à²µà²¿. à²à²°à³à²¨à²¾à²à². à²­à²¾à²°à²¤. Â© 2022 Designed &amp; Developed by Project Management Cell (PMC), VTU, Belagavi. Karnataka. India.'
+90 
