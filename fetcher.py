@@ -1,15 +1,11 @@
 from bs4 import BeautifulSoup
 import requests
-import pandas as pd
-import numpy as np
 import os
 import html
-#college = {"AI": 63, "AD": 62, "CS": 187, "IS": 191, "ME": 17, "CV": 43, "AE": 54, "EE": 47, "EC": 179}
-#college = {"AI": 3, "AD": 2, "CS": 1, "IS": 2, "ME": 2, "CV": 2, "AE": 2, "EE": 2, "EC": 2}
 college = {"CS": 1}
-CAPCHA = 'nPgtXr'
-COOKIE = 'sr1um848a53sd0odvcjtfoo779r0qrlt3uqklue71ar05fb24v76dn16f1u8e8rheun0jtbudo1a1l3cv52ctqogu94fj513n3rncd3'
-TOKEN = '0e7543fbc9d2111bcd55b95f33b65b6a7ce61430'
+CAPCHA = 'Xpaecu'
+COOKIE = 'skbmpilpjum62jfs34k2obdn080amqk7f6fecfackul9e9udkn5dkpuf1qf0jlo0e5dlt73revv9lqedas0mj1mb7g23t5672o32cd1'
+TOKEN = '99a7221e9b64fbaa389f976c45444c6881adee24'
 URL = "https://results.vtu.ac.in/FMEcbcs22/resultpage.php"
 HEADERS = {
     'Host': 'results.vtu.ac.in',
@@ -33,44 +29,28 @@ HEADERS = {
     'Accept-Language': 'en-US,en;q=0.9',
     'Connection': 'close'
 }
-#exam = input("Enter Semester Number : ") + " Semester"
 exam = str(1)+ " Semester"
 path = os.getcwd()
-#with pd.ExcelWriter(exam+".xlsx") as writer:
 for course, nos in college.items():
-    name = [np.nan]*nos
-    usno = [np.nan]*nos
-    cr = [np.nan]*nos
-    co = [np.nan]*nos
-    sgpa = [np.nan]*nos
-    grade = [np.nan]*nos
     for n in range(0,nos):
         usn = '1DB21' + course + str(n+1).zfill(3)
         PAYLOAD = 'Token='+TOKEN+'&lns='+usn+'&captchacode='+CAPCHA
-        r = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
-        htl = html.unescape(r.text)
-        cleantext = BeautifulSoup(htl, "html.parser").text
-        text = "\n".join([ll.rstrip() for ll in cleantext.splitlines() if ll.strip()])
-        #text = text.split("\n")
-        print(text.encode("utf-8"))
-        #print(text[4])
-        #print(text[5])
-        #print(text[8])
-        #print(text[10])
-        #print(text[12])
-        #print("PASS" if text[10] == "21" else "FAIL")
-        #name[n] = (text[4])
-        #usno[n] = (text[5])
-        #cr[n] = int(text[8])
-        #co[n] = int(text[10])
-        #sgpa[n] = float(text[12])
-        #grade[n] = ("PASS" if text[10] == "21" else "FAIL")
-    #df = pd.DataFrame({
-    #    'USN':usno,
-    #    'Name':name,
-    #    'Credits Required':cr,
-    #    'Credits Obtained':co,
-    #    'SGPA':sgpa,
-    #    'Grade':grade,
-    #})
-    #df.to_excel(writer, sheet_name=course, index=False,)
+        response = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
+        response = html.unescape(response.text)
+        response = BeautifulSoup(response, 'html.parser').text
+        response = response.replace("\t", "")
+        response = response.strip()
+        response = response.replace("\n\n\n", "\n")
+        response = response.replace("\n\n", "\n")
+        response = response.replace("\n\n\n", "\n")
+        response = response.replace("\n\n", "\n")
+        response = response.replace(" : ", "")
+        response = response.replace(": ", "")
+        response = response.split("\n")
+        del response[78:]
+        del response[:3]
+        #print(response)
+        i = 0
+        for l in response:
+            print(i, l)
+            i=i+1
