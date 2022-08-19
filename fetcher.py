@@ -1,5 +1,4 @@
 #from calendar import c
-import os
 import requests
 import html
 import pandas as pd
@@ -7,7 +6,9 @@ from time import sleep
 from bs4 import BeautifulSoup
 from collections import Counter
 
-college = {"CI": 110}
+exam = "1 Semester"
+college = {"CI": 18}
+college = {"CS": 2, "CI": 2, "IS": 2, "AD": 2, "EC": 2, "CV": 2, "ME": 2, "EE": 2}
 
 def grade_point(m, c):
     if m >= 90:
@@ -28,8 +29,10 @@ def grade_point(m, c):
 def sgpa(marks):
     credits = [3, 3, 3, 3, 3, 1, 1, 2, 1]
     points = 0
+
     for x in range(len(marks)):
         points += grade_point(marks[x], credits[x])
+    
     return (points / sum(credits))
 
 
@@ -60,25 +63,29 @@ HEADERS = {
     'Accept-Language': 'en-US,en;q=0.9',
     'Connection': 'close'
 }
-exam = str(1)+ " Semester"
-path = os.getcwd()
 with pd.ExcelWriter(exam+".xlsx") as writer:
     for course, nos in college.items():
         for err in range(19):
+
             usn_arresult_percentage_array=[]
             name_arresult_percentage_array = []
             result_percentage_array = []
             sgpa_percentage_array = []
             total_percentage_array = []
             percentage_percentage_array = []
+
             for n in range(0,nos):
-                if(err == 18):
-                    sleep(5)
+
                 usn = '1DB21' + course + str(n+1).zfill(3)
+
                 PAYLOAD = 'Token='+TOKEN+'&lns='+usn+'&captchacode='+CAPCHA
+
                 response = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
+
                 response = html.unescape(response.text)
+
                 response = BeautifulSoup(response, 'html.parser').text
+
                 response = response.replace("\t", "")
                 response = response.strip()
                 response = response.replace("\n\n\n", "\n")
@@ -88,38 +95,35 @@ with pd.ExcelWriter(exam+".xlsx") as writer:
                 response = response.replace(" : ", "")
                 response = response.replace(": ", "")
                 response = response.split("\n")
+
                 del response[78:]
                 del response[:3]
 
                 frequency = Counter(response)
                 frequency = dict(frequency)
 
-                result = ("PASS" if frequency['P'] == 9  else "FAIL")            
-
-
+                result = ("PASS" if frequency['P'] == 9  else "FAIL")
 
                 usn_arresult_percentage_array.append(response[1])
                 name_arresult_percentage_array.append(response[3])
                 result_percentage_array.append(result)
+
                 total = 0
                 pos = 16
                 marks = []
                 for i in range(9):
                     total = total + int(response[pos])
                     marks.append(int(response[pos]))
-                    print(int(response[pos]))
                     pos = pos+7
+                
                 total_percentage_array.append(total)
                 percentage_percentage_array.append(total/9)
+
                 if result == "PASS":
                     sgpa_percentage_array.append(sgpa(marks))
                 else:
                     sgpa_percentage_array.append(0)
-    
-                    #i = 0
-                    #for l in response:
-                    #    print(i, l)
-                    #    i=i+1
+
             df = pd.DataFrame({
                 'USN':usn_arresult_percentage_array,
                 'Name':name_arresult_percentage_array,
