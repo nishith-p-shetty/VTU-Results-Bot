@@ -1,4 +1,3 @@
-#from calendar import c
 import requests
 import html
 import pandas as pd
@@ -7,8 +6,7 @@ from bs4 import BeautifulSoup
 from collections import Counter
 
 exam = "1 Semester"
-college = {"CI": 18}
-college = {"CS": 2, "CI": 2, "IS": 2, "AD": 2, "EC": 2, "CV": 2, "ME": 2, "EE": 2}
+college = {"CS": 3, "CI": 3, "IS": 3, "AD": 3, "EC": 3, "CV": 3, "ME": 3, "EE": 3}
 
 def grade_point(m, c):
     if m >= 90:
@@ -36,9 +34,9 @@ def sgpa(marks):
     return (points / sum(credits))
 
 
-CAPCHA = 'bVXXud'
-COOKIE = 'v0541a7t43h7o4ifst2hgp79e3f577hf5n8q2p8iu1esihkh1o9hk1opspvn0ak7va4nk45rfe3ni4bfn9qgu8k63agtjuk0n4h1k31'
-TOKEN = '90db35af85ef1a49409eb551347be8acf335cd97'
+CAPCHA = 'UnWCWg'
+COOKIE = 'k0bdvc94qvn1m8kd00rskebkt5eredqla2vjsoom5m7ice606s2j7jth5k1ngm8pglealeposh0299i6npkd6ohbvrfrv5inbs9kc03'
+TOKEN = 'b734b9abe23c432d4eb2d29df20ae9ef8726b54a'
 
 URL = "https://results.vtu.ac.in/FMEcbcs22/resultpage.php"
 HEADERS = {
@@ -65,71 +63,57 @@ HEADERS = {
 }
 with pd.ExcelWriter(exam+".xlsx") as writer:
     for course, nos in college.items():
-        for err in range(19):
-
-            usn_arresult_percentage_array=[]
-            name_arresult_percentage_array = []
-            result_percentage_array = []
-            sgpa_percentage_array = []
-            total_percentage_array = []
-            percentage_percentage_array = []
-
-            for n in range(0,nos):
-
-                usn = '1DB21' + course + str(n+1).zfill(3)
-
-                PAYLOAD = 'Token='+TOKEN+'&lns='+usn+'&captchacode='+CAPCHA
-
-                response = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
-
-                response = html.unescape(response.text)
-
-                response = BeautifulSoup(response, 'html.parser').text
-
-                response = response.replace("\t", "")
-                response = response.strip()
-                response = response.replace("\n\n\n", "\n")
-                response = response.replace("\n\n", "\n")
-                response = response.replace("\n\n\n", "\n")
-                response = response.replace("\n\n", "\n")
-                response = response.replace(" : ", "")
-                response = response.replace(": ", "")
-                response = response.split("\n")
-
-                del response[78:]
-                del response[:3]
-
-                frequency = Counter(response)
-                frequency = dict(frequency)
-
-                result = ("PASS" if frequency['P'] == 9  else "FAIL")
-
-                usn_arresult_percentage_array.append(response[1])
-                name_arresult_percentage_array.append(response[3])
-                result_percentage_array.append(result)
-
-                total = 0
-                pos = 16
-                marks = []
-                for i in range(9):
-                    total = total + int(response[pos])
-                    marks.append(int(response[pos]))
-                    pos = pos+7
-                
-                total_percentage_array.append(total)
-                percentage_percentage_array.append(total/9)
-
-                if result == "PASS":
-                    sgpa_percentage_array.append(sgpa(marks))
-                else:
-                    sgpa_percentage_array.append(0)
-
-            df = pd.DataFrame({
-                'USN':usn_arresult_percentage_array,
-                'Name':name_arresult_percentage_array,
-                'Result':result_percentage_array,
-                'SGPA':sgpa_percentage_array,
-                'Total':total_percentage_array,
-                '%':percentage_percentage_array
-            })
-            df.to_excel(writer, sheet_name=course, index=False)
+        usn_array=[]
+        name_array = []
+        result_array = []
+        sgpa_array = []
+        total_array = []
+        percentage_array = []
+        for n in range(0,nos):
+            usn = '1DB21' + course + str(n+1).zfill(3)
+            PAYLOAD = 'Token='+TOKEN+'&lns='+usn+'&captchacode='+CAPCHA
+            response = requests.post(url = URL, headers= HEADERS, data=PAYLOAD, verify=False)
+            sleep(1)
+            response = html.unescape(response.text)
+            response = BeautifulSoup(response, 'html.parser').text
+            response = response.replace("\t", "")
+            response = response.strip()
+            response = response.replace("\n\n\n", "\n")
+            response = response.replace("\n\n", "\n")
+            response = response.replace("\n\n\n", "\n")
+            response = response.replace("\n\n", "\n")
+            response = response.replace(" : ", "")
+            response = response.replace(": ", "")
+            response = response.split("\n")
+            del response[78:]
+            del response[:3]
+            frequency = Counter(response)
+            frequency = dict(frequency)
+            result = ("PASS" if frequency['P'] == 9  else "FAIL")
+            usn_array.append(response[1])
+            name_array.append(response[3])
+            result_array.append(result)
+            total = 0
+            pos = 16
+            marks = []
+            for i in range(9):
+                total = total + int(response[pos])
+                marks.append(int(response[pos]))
+                pos = pos+7
+            
+            total_array.append(total)
+            percentage_array.append(total/9)
+            if result == "PASS":
+                sgpa_array.append(sgpa(marks))
+            else:
+                sgpa_array.append(0)
+        df = pd.DataFrame({
+            'USN':usn_array,
+            'Name':name_array,
+            'Result':result_array,
+            'SGPA':sgpa_array,
+            'Total':total_array,
+            '%':percentage_array
+        })
+        df.to_excel(writer, sheet_name=course, index=False)
+        sleep(5)
