@@ -35,9 +35,9 @@ def sgpa(marks):
     return (points / sum(credits))
 
 
-CAPCHA = 'UnWCWg'
-COOKIE = 'k0bdvc94qvn1m8kd00rskebkt5eredqla2vjsoom5m7ice606s2j7jth5k1ngm8pglealeposh0299i6npkd6ohbvrfrv5inbs9kc03'
-TOKEN = 'b734b9abe23c432d4eb2d29df20ae9ef8726b54a'
+TOKEN = input("Token  : ")
+COOKIE = input("Cookie : ")
+CAPCHA = input("Captcha : ")
 
 URL = "https://results.vtu.ac.in/FMEcbcs22/resultpage.php"
 HEADERS = {
