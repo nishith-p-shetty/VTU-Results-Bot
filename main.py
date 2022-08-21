@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from collections import Counter
 
 exam = "1 Semester"
-college = {"CS": 2, "CI": 2, "IS": 2, "AD": 2, "EC": 2, "CV": 2, "ME": 2, "EE": 2}
-#college = {"CI": 110, "IS": 174, "AD": 54,"EE": 33, "CS": 2, "EC": 2, "CV": 2, "ME": 2}
+college = {"CS": 5, "CI": 5, "IS": 5, "AD": 5, "EC": 5, "CV": 5, "ME": 5, "EE": 5}
+#college = {"CI": 110, "IS": 174, "AD": 54,"EE": 33, "CS": 5, "EC": 5, "CV": 5, "ME": 5}
 
 def grade_point(m, c):
     if m >= 90:
