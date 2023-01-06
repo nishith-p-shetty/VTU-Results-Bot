@@ -25,7 +25,7 @@ def grade_point(m, c):
     else :
         return (c * 0)
 
-def sgpa(marks):
+def sgpa (marks):
     credits = [3, 3, 3, 3, 3, 1, 1, 2, 1]
     points = 0
 
