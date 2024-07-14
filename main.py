@@ -5,9 +5,8 @@ from time import sleep
 from bs4 import BeautifulSoup
 from collections import Counter
 
-exam = "1 Semester"
-college = {"CS": 5, "CI": 5, "IS": 5, "AD": 5, "EC": 5, "CV": 5, "ME": 5, "EE": 5}
-#college = {"CI": 110, "IS": 174, "AD": 54,"EE": 33, "CS": 5, "EC": 5, "CV": 5, "ME": 5}
+exam = "5 Semester"
+college = {"CS": 3, "CI": 2, "IS": 3, "AD": 3, "EC": 3}
 
 def grade_point(m, c):
     if m >= 90:
@@ -34,12 +33,11 @@ def sgpa (marks):
     
     return (points / sum(credits))
 
-
 TOKEN = input("Token  : ")
 COOKIE = input("Cookie : ")
 CAPCHA = input("Captcha : ")
 
-URL = "https://results.vtu.ac.in/FMEcbcs22/resultpage.php"
+URL = "https://results.vtu.ac.in/DJcbcs24/resultpage.php"
 HEADERS = {
     'Host': 'results.vtu.ac.in',
     'Cookie': 'VISRE='+COOKIE,
@@ -50,6 +48,7 @@ HEADERS = {
     'Sec-Ch-Ua-Platform': '"Linux"',
     'Upgrade-Insecure-Requests': '1',
     'Origin': 'https://results.vtu.ac.in',
+    'Dnt': '1',
     'Content-Type': 'application/x-www-form-urlencoded',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -57,12 +56,13 @@ HEADERS = {
     'Sec-Fetch-Mode': 'navigate',
     'Sec-Fetch-User': '?1',
     'Sec-Fetch-Dest': 'document',
-    'Referer': 'https://results.vtu.ac.in/FMEcbcs22/index.php',
+    'Referer': 'https://results.vtu.ac.in/DJcbcs24/index.php',
     'Accept-Encoding': 'gzip, deflate',
     'Accept-Language': 'en-US,en;q=0.9',
     'Connection': 'close'
 }
-with pd.ExcelWriter(exam+".xlsx") as writer:
+
+with pd.ExcelWriter(exam+".xlsx", engine='openpyxl') as writer:
     for course, nos in college.items():
         usn_array=[]
         name_array = []
@@ -90,14 +90,15 @@ with pd.ExcelWriter(exam+".xlsx") as writer:
             del response[:3]
             frequency = Counter(response)
             frequency = dict(frequency)
-            result = ("PASS" if frequency['P'] == 9  else "FAIL")
+            result = ("PASS" if frequency['P'] == 8  else "FAIL")
+            # result = "0"
             usn_array.append(response[1])
             name_array.append(response[3])
             result_array.append(result)
             total = 0
             pos = 16
             marks = []
-            for i in range(9):
+            for i in range(8):
                 total = total + int(response[pos])
                 marks.append(int(response[pos]))
                 pos = pos+7
